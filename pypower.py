@@ -285,7 +285,7 @@ class GUI:
                     allowed_num += 1
                     columns += 1
                     if allowed_num in multy:
-                        start_row += 1
+                        rows += 1
                         columns = start_column
             master.after(len(widgets) // 1000, m)
         def all_objects(master):
