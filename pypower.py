@@ -279,7 +279,7 @@ class GUI:
                     master.grid_columnconfigure(i, minsize=widgets[0].winfo_reqwidth())
                 columns = start_column
                 allowed_num = 0
-                multy = Math.number_multiplies(per_row, len(widgets), set)
+                multy = range(per_row, len(widgets)+1, per_row)
                 for w in widgets:
                     w.grid(column=columns, row=start_row, padx=padx, pady=pady)
                     allowed_num += 1
@@ -362,7 +362,7 @@ class String:
         """Insert sep every after_how_many_letters characters in the string."""
         value = 0
         new = ''
-        ran = Math.number_multiplies(after_how_many_letters, len(self.text)-1)
+        ran = range(after_how_many_letters, len(self.text)-1, after_how_many_letters)
         for i in self.text:
             new += i
             value += 1
@@ -458,9 +458,6 @@ class Math:
     def iter_num(iterable):
         """Return sum, average, max, and min of an iterable as a dict."""
         return {'sum': sum(iterable), 'average': sum(iterable) / len(iterable), 'max': max(iterable), 'min': min(iterable)}
-    def number_multiplies(num, end, type=list):
-        """Return all multiples of num up to end. ex: number_multiplies(3, 9) -> [3, 6, 9]"""
-        return type(range(num, end+1, num))
     def arrays(array, step, show='lists'):
         """Split a range into consecutive [start, end] pairs by step.
         If show != 'lists', return a formatted string instead."""
