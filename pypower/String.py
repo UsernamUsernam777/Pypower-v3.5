@@ -10,9 +10,6 @@ def super_join(text, sep, after_how_many_letters):
         if value in ran:
             new += sep
     return new
-def reverse(text, sep):
-    """Reverse the order of parts split by sep. ex: 'a-b-c' -> 'c-b-a'"""
-    return f'{sep}'.join(text.split(sep)[::-1])
 def replace_objects_with_one(text, iterable, new_obj=''):
     """Replace every character found in iterable with new_obj."""
     result = ''
