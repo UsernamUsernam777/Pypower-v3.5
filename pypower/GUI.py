@@ -1,6 +1,6 @@
 import customtkinter as _ctk
 from . import Math as _Math
-from . import Files as __Files
+from . import Files as _Files
 from . import String as _String
 from . import Iterable as _Iterable
 import ast as _ast
@@ -237,10 +237,20 @@ class CustomTk:
             else:
                 GUI.CustomTk.Manager.manager_same(i, GUI.CustomTk.clone_widget_not_frame(i, new_frame))
         return new_frame
-    def add_texts_to_file(master, file, title):
+    def add_texts_to_file(master, file):
         _Files.make_if_not_exists(file, 'txt')
-        new = str(CustomTk.has_text_iterable(CustomTk.all_objects(master), text_obj=True)['texts'])
-        _Files.append_to_file(file, title + _String.replace_many(new, ['[', ']', ', '], ['', '', '\n']))
+        new = CustomTk.has_text_iterable(CustomTk.all_objects(master))
+        new = sorted(new, key=lambda i: str(i))
+        new = [i.cget('text') for i in new]
+        _Files.read_write_txt_file(file, 'write', str(new))
+    def texts_from_file(master, file):
+        _Files.make_if_not_exists(file, 'txt')
+        text = _Files.read_write_txt_file(file)
+        if text:
+            lst = _ast.literal_eval(text)
+            a = sorted(CustomTk.has_text_iterable(CustomTk.all_objects(master)), key=lambda w: str(w))
+            for i, e in zip(a, lst):
+                i.configure(text=e)
     def has_text(obj, with_empty=False):
         try:
             obj.cget('text')
